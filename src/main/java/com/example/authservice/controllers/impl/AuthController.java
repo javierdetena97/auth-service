@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController implements AuthApi {
-
     private final AuthService authService;
 
     public AuthController(AuthService authService) {
@@ -19,6 +18,11 @@ public class AuthController implements AuthApi {
     @Override
     public ResponseEntity<TokenResponse> createUser(UserRequest userRequest) {
         return ResponseEntity.ok(authService.createUser(userRequest));
+    }
+
+    @Override
+    public ResponseEntity<String> getUser(String userId) {
+        return ResponseEntity.ok(userId);
     }
 
 }
