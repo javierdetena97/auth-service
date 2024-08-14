@@ -1,2 +1,17 @@
 jwt:
   secret: kdosdireladskvsadfkeialwjafkldoepfwfndsnvldsfuwoekmlsdflsffdjskiefaej
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users
+    username: postgres
+    password: asdf1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+logging:
+  level:
+    org:
+      hibernate:
+        sql: debug
