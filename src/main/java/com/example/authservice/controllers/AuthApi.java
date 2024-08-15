@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public interface AuthApi {
 
     @PostMapping(value = "/register")
-    ResponseEntity<TokenResponse> createUser(@RequestBody @Valid UserRequest userRequest);
+    ResponseEntity<TokenResponse> registerUser(@RequestBody @Valid UserRequest userRequest);
+
+    @PostMapping(value = "/login")
+    ResponseEntity<TokenResponse> loginUser(@RequestBody @Valid UserRequest userRequest);
 
     @GetMapping
     ResponseEntity<String> getUser(@RequestAttribute(name = "X-User-Id") String userId);
