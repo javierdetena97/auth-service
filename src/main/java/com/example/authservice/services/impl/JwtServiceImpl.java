@@ -12,10 +12,10 @@ import java.util.Date;
 
 @Service
 public class JwtServiceImpl implements JwtService {
-    private final String secretToken;
+    private final String secretKey;
 
-    public JwtServiceImpl(@Value("${jwt.secret}") String secretToken) {
-        this.secretToken = secretToken;
+    public JwtServiceImpl(@Value("${jwt.secret}") String secretKey) {
+        this.secretKey = secretKey;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class JwtServiceImpl implements JwtService {
                 .setSubject(String.valueOf(userId))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, this.secretToken)
+                .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
 
         return TokenResponse.builder()
@@ -37,7 +37,7 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public Claims getClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(this.secretToken)
+                .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
