@@ -1,5 +1,5 @@
-jwt:
-  secret: kdosdireladskvsadfkeialwjafkldoepfwfndsnvldsfuwoekmlsdflsffdjskiefaejasdfefasfdvadeavdcvadsfeafgssgadfafadsfeafdaadfe
+server:
+  port: 8081
 
 spring:
   datasource:
@@ -15,3 +15,6 @@ logging:
     org:
       hibernate:
         sql: debug
+
+jwt:
+  secret: kdosdireladskvsadfkeialwjafkldoepfwfndsnvldsfuwoekmlsdflsffdjskiefaejasdfefasfdvadeavdcvadsfeafgssgadfafadsfeafdaadfe
