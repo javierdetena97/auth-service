@@ -35,17 +35,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenResponse loginUser(UserRequest userRequest) {
-        // Check email
-        User userRegistered = userRepository.findByEmail(userRequest.getEmail())
+        return Optional.of(userRequest)
+                .map(UserRequest::getEmail)
+                .flatMap(userRepository::findByEmail)
+                .filter(user -> passwordEncoder.matches(userRequest.getPassword(), user.getPassword()))
+                .map(user -> jwtService.generateToken(user.getId()))
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
-
-        // Check password
-        if (!passwordEncoder.matches(userRequest.getPassword(), userRegistered.getPassword())) {
-            throw new RuntimeException("Invalid email or password");
-        }
-
-        TokenResponse token = jwtService.generateToken(userRegistered.getId());
-        return token;
     }
 
     private User mapToEntity(UserRequest userRequest) {
